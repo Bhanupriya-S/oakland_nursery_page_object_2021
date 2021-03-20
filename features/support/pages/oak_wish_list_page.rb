@@ -1,0 +1,22 @@
+class OakWishListPage < OakPlantSearchPage
+
+  text_field(:quantity, id: 'QtymP1')
+  link(:update_wish_list, text: 'Update My Wish List')
+
+  include PageObject
+
+  def update_wishlist_quantity new_quantity
+    self.quantity = new_quantity
+  end
+
+  def verify_wishlist_quantity_has_updated exp_quantity
+    new_quantity = quantity_element.value
+    fail "#{exp_quantity} is Not same as #{new_quantity.to_i}" unless exp_quantity.eql? new_quantity.to_i
+  end
+
+  def empty_wishlist
+    choose_first_result_element.click if choose_first_result_element.checked?
+    update_wish_list_element.click
+  end
+
+end
