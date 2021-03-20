@@ -1,4 +1,4 @@
-Feature: Oakland_plant_search functionality
+Feature: Oakland_Plant_Search Functionality
 
   Background:
     Given user is on plant search page

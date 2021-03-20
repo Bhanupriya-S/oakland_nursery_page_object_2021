@@ -1,4 +1,4 @@
-Feature: Oakland Fruit search functionality
+Feature: Oakland_Fruit_Search Functionality
 
   Background:
     Given user is on fruit search page
