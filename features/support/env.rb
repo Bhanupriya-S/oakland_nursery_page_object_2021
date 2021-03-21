@@ -2,7 +2,7 @@ require 'rspec'
 require 'page-object'
 require 'data_magic'
 
-World(PageObject::PageFactory)
+World(PageObject::PageFactory) # in page object frame work - we used pagefactory module and this is globally available across the method.
 
 # oakland_test = 'www.oaklandtest.com'
 # oakland_int = 'www.oaklandint.com'
