@@ -108,3 +108,28 @@ Then(/^user can modify the quantity in the wishlist$/) do
     Then verify user can see updated quantity
   }
 end
+
+When(/^user verifies data can be read from yml file$/) do
+  # file_path = 'features/support/test data/test_data.yml'
+  # test_data = YAML.load_file 'features/support/test data/test_data.yml'
+  # # Moved the above code in "env.rb" for loading the file by default
+  p 'Orginal data from Yaml file:'
+  p $test_data['language_name']
+  p $test_data['chase']['id']
+  p 'Data modification :'
+  p $test_data['chase']['name'] = 'java'
+  p $test_data['chase']['id'] = '64617'
+  p 'File Concept for rewriting'
+  File.open($file_path, 'w') { |each_value|
+
+    $test_data['chase']['id'] = 47272
+    each_value.write($test_data.to_yaml)
+  }
+  p $test_data['chase']['id']
+end
+
+And(/^verify the details of (.*) are correct$/) do |plant_name|
+  p $test_data[plant_name]['Plant_type']
+  p 'done'
+end
+

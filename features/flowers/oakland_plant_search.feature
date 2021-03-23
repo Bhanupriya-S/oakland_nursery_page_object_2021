@@ -71,3 +71,12 @@ Feature: Oakland_Plant_Search Functionality
       | Flower Height | 6 feet       |
       | Spread        | 24 inches    |
       | Sunlight      | full sun     |
+
+    Scenario: verify the yml test data functionality
+      When user verifies data can be read from yml file
+
+  Scenario: verify the plant search details : Plant type,Plant height,Flower height,Spread,Sunlight are correct in yml file
+    When user search for the plant Rose
+    Then user should see the results related to Rose
+    And verify the details of Rose are correct
+
