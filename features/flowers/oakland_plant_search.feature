@@ -1,14 +1,17 @@
+@plant_search
 Feature: Oakland_Plant_Search Functionality
 
   Background:
     Given user is on plant search page
 
+  @smoke_test
   Scenario: verify the user can search for the given plant
     When user search for the plant Rose
     Then user should see the results related to Rose
-    And verify the search result is not more than 10
+    And verify the search result is not more than 15
   # Scenario name should be the same - it will run multiple times because of duplication
 
+  @regression_test
   Scenario Outline: verify the user can search for different plants
     When user search for the plant <plant_name>
     Then user should see the results related to <plant_name>
@@ -16,8 +19,9 @@ Feature: Oakland_Plant_Search Functionality
     Examples:
       | plant_name | no_of_items |
       | Rose       | 10          |
-      | Sunflower  | 10          |
+      | Sunflower  | 15          |
 
+    @jira-160
   Scenario Outline: verify the user can search for different plant with details
     When user search for the plant <plant_name>
     Then user should see the results related to <plant_name>
@@ -72,11 +76,18 @@ Feature: Oakland_Plant_Search Functionality
       | Spread        | 24 inches    |
       | Sunlight      | full sun     |
 
-    Scenario: verify the yml test data functionality
-      When user verifies data can be read from yml file
+    Scenario: verify the the yml test data functionality
+      When user verifies the data can be read from yml file
 
-  Scenario: verify the plant search details : Plant type,Plant height,Flower height,Spread,Sunlight are correct in yml file
+  Scenario: verify the plant search details : Plant type,Plant height,Flower height,Spread,Sunlight are correct using yml file
     When user search for the plant Rose
     Then user should see the results related to Rose
     And verify the details of Rose are correct
+
+  @wip
+  Scenario: verify the something something...
+    When somethinig is a thing
+    Then do a thing
+    And dont do a thing
+
 

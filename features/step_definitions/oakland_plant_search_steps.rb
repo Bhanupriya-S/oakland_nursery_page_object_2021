@@ -11,7 +11,7 @@ Then(/^user should see the results related to (.+)$/) do |plant_name|
 end
 
 And(/^verify the search result is not more than (\d+)$/) do |max_results|
-  on(OakPlantSearchPage).verify_no_of_plant_search_results
+  on(OakPlantSearchPage).verify_no_of_plant_search_results max_results
 end
 
 And(/^user add the first result to the wishlist$/) do
@@ -129,7 +129,9 @@ When(/^user verifies data can be read from yml file$/) do
 end
 
 And(/^verify the details of (.*) are correct$/) do |plant_name|
-  p $test_data[plant_name]['Plant_type']
-  p 'done'
+  p $test_data[plant_name]['Plant Type']
+  actual_plant_details = on(OakPlantSearchPage).get_plant_info
+  expected_plant_details = $test_data[plant_name]
+  expect(expected_plant_details.sort).should.eql? actual_plant_details.sort
 end
 
