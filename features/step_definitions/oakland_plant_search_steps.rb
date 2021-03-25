@@ -55,7 +55,7 @@ And(/^verify the details of the plant$/) do |table|
   actual_plant_details = on(OakPlantSearchPage).get_plant_info
   expected_plant_details = {}
   table.hashes.each do |each_plant|
-    expected_plant_details[ each_plant['plant_details']] = each_plant['plant_values']
+    expected_plant_details[each_plant['plant_details']] = each_plant['plant_values']
   end
   p "Expected Plant Details : #{expected_plant_details}"
   p "Actual Plant Details : #{actual_plant_details}"
@@ -108,3 +108,30 @@ Then(/^user can modify the quantity in the wishlist$/) do
     Then verify user can see updated quantity
   }
 end
+
+When(/^user verifies the data can be read from yml file$/) do
+  # below 2 lines of code moved to "env" file.
+  # file_path = 'features/support/test data/test_data.yml'
+  # test_data = YAML.load_file file_path
+  p $test_data['language_name']
+  p $test_data['chase']['id']
+  p 'Data -Modification :'
+  p $test_data['id'] = 400
+  p $test_data.fetch('language_name')
+
+  File.open($file_path, 'w') { |f|
+    $test_data['chase']['id'] = 1300
+    f.write($test_data.to_yaml)
+  }
+  p test_data['chase']['id']
+end
+
+And(/^verify the details of the (.*) are correct$/) do |plant_name|
+  # table is a table.hashes.keys # => [:plant_details, :plant_values]
+  p $test_data[plant_name]['Plant Type']
+
+  actual_plant_details = on(OakPlantSearchPage).get_plant_info
+  expected_plant_details = $test_data[plant_name]
+  sleep 2
+  expect(expected_plant_details.sort).should eql? actual_plant_details.sort
+  end
