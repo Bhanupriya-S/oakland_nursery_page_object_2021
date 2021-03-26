@@ -4,14 +4,14 @@ Feature: Oakland_Plant_Search Functionality
   Background:
     Given user is on plant search page
 
-  @smoke_test
+  @smoke
   Scenario: verify the user can search for the given plant
     When user search for the plant Rose
     Then user should see the results related to Rose
     And verify the search result is not more than 15
   # Scenario name should be the same - it will run multiple times because of duplication
 
-  @regression_test
+  @regression
   Scenario Outline: verify the user can search for different plants
     When user search for the plant <plant_name>
     Then user should see the results related to <plant_name>

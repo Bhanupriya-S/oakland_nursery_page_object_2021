@@ -16,7 +16,7 @@ After do |scenario|
   SCREENSHOTS_DIRECTORY = "html_report"
   if scenario.failed?
     #Saves screeshots to features/test_results/Screenshots directory, name is scenario name
-    screenshot = "#{scenario.name.gsub(' ', '-').gsub(/[^0-9A-Za-z_]/, '')}.png"
+    screenshot = "#{Time.now.strftime("%m-%d_%H-%M-%S")}_#{scenario.name.gsub(' ', '-').gsub(/[^0-9A-Za-z_]/, '')}.png"
     @browser.driver.save_screenshot(File.join(SCREENSHOTS_DIRECTORY, screenshot))
     embed(File.join(SCREENSHOTS_DIRECTORY, screenshot),"image/png","SCRRENSHOT")
   end
