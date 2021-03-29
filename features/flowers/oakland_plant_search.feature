@@ -19,7 +19,7 @@ Feature: Oakland_Plant_Search Functionality
     Examples:
       | plant_name | no_of_items |
       | Rose       | 10          |
-      | Sunflower  | 15          |
+      | Sunflower  | 5          |
 
     @jira-160
   Scenario Outline: verify the user can search for different plant with details

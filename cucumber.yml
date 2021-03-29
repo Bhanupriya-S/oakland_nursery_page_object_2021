@@ -6,5 +6,5 @@ std_opts = "--tags ~@wip --tags ~@manual -r features -r features/support/env.rb 
 
 default: --no-source --color --format pretty --format html --out <%= html_path %>
 
-smoke: --no-source --color --format pretty --format html --out <%= html_path %> --tags @smoke
-regression: --no-source --color --format pretty --format html --out <%= html_path %> --tegs @regression
+smoke: --no-source --color --format pretty --format html --out <%= html_path %> --tags @smoke --format html --out cucumber.json
+regression: --no-source --color --format pretty --format html --out <%= html_path %> --tags @regression

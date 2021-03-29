@@ -18,6 +18,6 @@ After do |scenario|
     #Saves screeshots to features/test_results/Screenshots directory, name is scenario name
     screenshot = "#{Time.now.strftime("%m-%d_%H-%M-%S")}_#{scenario.name.gsub(' ', '-').gsub(/[^0-9A-Za-z_]/, '')}.png"
     @browser.driver.save_screenshot(File.join(SCREENSHOTS_DIRECTORY, screenshot))
-    embed(File.join(SCREENSHOTS_DIRECTORY, screenshot),"image/png","SCRRENSHOT")
+    embed(File.join(SCREENSHOTS_DIRECTORY, screenshot),"image/png","SCREENSHOT")
   end
 end
