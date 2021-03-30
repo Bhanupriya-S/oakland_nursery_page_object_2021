@@ -31,12 +31,23 @@ Then(/^verify user can see updated quantity$/) do
   on(OakWishListPage).verify_wishlist_quantity_has_updated 3
 end
 
-When(/^user adds the plant (.*) to the wishlist$/) do |plant_name|
-  on(OakPlantSearchPage).search_plant plant_name
-  @first_plant_name = on(OakPlantSearchPage).get_all_plant_names.first
-  on(OakPlantSearchPage).add_plant_to_wishlist
-  on(OakPlantSearchPage).verify_wishlist_has_plant @first_plant_name
-end
+# When(/^user adds the plant (.*) to the wishlist$/) do |plant_name|
+#   on(OakPlantSearchPage).search_plant plant_name
+#   @first_plant_name = on(OakPlantSearchPage).get_all_plant_names.first
+#   on(OakPlantSearchPage).add_plant_to_wishlist
+#   on(OakPlantSearchPage).verify_wishlist_has_plant @first_plant_name
+# end
+
+# Above or Below
+
+ When(/^user adds the plant (.*) to the wishlist$/) do
+   on(OakPlantSearchPage) do |page|
+     page.search_plant 'Rose'
+    @first_plant_name = page.get_all_plant_names.first
+     page.add_plant_to_wishlist
+     page.verify_wishlist_has_plant @first_plant_name
+   end
+ end
 
 And(/^user empty the wishlist$/) do
   on(OakWishListPage).empty_wishlist
@@ -84,16 +95,16 @@ And(/^verify the header details of the plant$/) do |table|
 end
 
 Then(/^user can modify the quantity in the wishlist$/) do
-  # on(OakPlantSearchPage) do |page|
-  #   page.search_plant 'Rose'
-  #   @first_plant_name = page.get_all_plant_names.first
-  #   page.add_plant_to_wishlist
-  # end
-  #
-  # on(OakWishListPage) do |page|
-  #   page.update_wishlist_quantity 3
-  #   page.verify_wishlist_quantity_has_updated 3
-  # end
+  on(OakPlantSearchPage) do |page|
+    page.search_plant 'Rose'
+    @first_plant_name = page.get_all_plant_names.first
+    page.add_plant_to_wishlist
+  end
+
+  on(OakWishListPage) do |page|
+    page.update_wishlist_quantity 3
+    page.verify_wishlist_quantity_has_updated 3
+  end
 
   # plant_name = 'Rose'
   # "step 'user search for the plant #{plant_name}"
