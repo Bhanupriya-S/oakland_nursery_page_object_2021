@@ -71,3 +71,9 @@ Feature: Oakland_Fruit_Search Functionality
       | Flower Height | 6 feet       |
       | Spread        | 24 inches    |
       | Sunlight      | full sun     |
+
+  @jira2345
+  Scenario: testing new functionality for fruits
+    Given fdafsaf
+    When fdafdff
+    Then fdsafds
