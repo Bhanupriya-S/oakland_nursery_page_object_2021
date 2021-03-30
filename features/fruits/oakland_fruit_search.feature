@@ -77,3 +77,11 @@ Feature: Oakland_Fruit_Search Functionality
     Given fdafsaf
     When fdafdff
     Then fdsafds
+
+
+  @jira2345
+  Scenario: testing new functionality for fruits - negative case
+    Given fdafsaf
+    When fdafdff
+    Then fdsafds
+    And fdsafdsfadsf
