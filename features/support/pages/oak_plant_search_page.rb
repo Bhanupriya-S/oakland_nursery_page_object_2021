@@ -38,8 +38,8 @@ class OakPlantSearchPage
     end
   end
 
-  def verify_no_of_plant_search_results
-    fail "No of results are more than 10" unless plant_names_elements.count <= 10
+  def verify_no_of_plant_search_results exp_count
+    fail "No of results are more than #{exp_count}" unless plant_names_elements.count == exp_count
   end
 
   def add_plant_to_wishlist

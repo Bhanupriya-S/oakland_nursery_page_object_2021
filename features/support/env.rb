@@ -17,3 +17,8 @@ $app_url = "https://plants.oaklandnursery.com/12130001"
 if ENV['browser_type'].nil?
   $browser_type = :chrome
 end
+
+$file_path = 'features/support/test data/test_data.yml'
+$test_data = YAML.load_file $file_path
+
+
