@@ -11,7 +11,7 @@ Then(/^user should see the results related to (.+)$/) do |plant_name|
 end
 
 And(/^verify the search result is not more than (\d+)$/) do |max_results|
-  on(OakPlantSearchPage).verify_no_of_plant_search_results
+  on(OakPlantSearchPage).verify_no_of_plant_search_results max_results
 end
 
 And(/^user add the first result to the wishlist$/) do
@@ -31,12 +31,23 @@ Then(/^verify user can see updated quantity$/) do
   on(OakWishListPage).verify_wishlist_quantity_has_updated 3
 end
 
-When(/^user adds the plant (.*) to the wishlist$/) do |plant_name|
-  on(OakPlantSearchPage).search_plant plant_name
-  @first_plant_name = on(OakPlantSearchPage).get_all_plant_names.first
-  on(OakPlantSearchPage).add_plant_to_wishlist
-  on(OakPlantSearchPage).verify_wishlist_has_plant @first_plant_name
-end
+# When(/^user adds the plant (.*) to the wishlist$/) do |plant_name|
+#   on(OakPlantSearchPage).search_plant plant_name
+#   @first_plant_name = on(OakPlantSearchPage).get_all_plant_names.first
+#   on(OakPlantSearchPage).add_plant_to_wishlist
+#   on(OakPlantSearchPage).verify_wishlist_has_plant @first_plant_name
+# end
+
+# Above or Below
+
+ When(/^user adds the plant (.*) to the wishlist$/) do
+   on(OakPlantSearchPage) do |page|
+     page.search_plant 'Rose'
+    @first_plant_name = page.get_all_plant_names.first
+     page.add_plant_to_wishlist
+     page.verify_wishlist_has_plant @first_plant_name
+   end
+ end
 
 And(/^user empty the wishlist$/) do
   on(OakWishListPage).empty_wishlist
@@ -55,7 +66,7 @@ And(/^verify the details of the plant$/) do |table|
   actual_plant_details = on(OakPlantSearchPage).get_plant_info
   expected_plant_details = {}
   table.hashes.each do |each_plant|
-    expected_plant_details[each_plant['plant_details']] = each_plant['plant_values']
+    expected_plant_details[ each_plant['plant_details']] = each_plant['plant_values']
   end
   p "Expected Plant Details : #{expected_plant_details}"
   p "Actual Plant Details : #{actual_plant_details}"
@@ -84,16 +95,16 @@ And(/^verify the header details of the plant$/) do |table|
 end
 
 Then(/^user can modify the quantity in the wishlist$/) do
-  # on(OakPlantSearchPage) do |page|
-  #   page.search_plant 'Rose'
-  #   @first_plant_name = page.get_all_plant_names.first
-  #   page.add_plant_to_wishlist
-  # end
-  #
-  # on(OakWishListPage) do |page|
-  #   page.update_wishlist_quantity 3
-  #   page.verify_wishlist_quantity_has_updated 3
-  # end
+  on(OakPlantSearchPage) do |page|
+    page.search_plant 'Rose'
+    @first_plant_name = page.get_all_plant_names.first
+    page.add_plant_to_wishlist
+  end
+
+  on(OakWishListPage) do |page|
+    page.update_wishlist_quantity 3
+    page.verify_wishlist_quantity_has_updated 3
+  end
 
   # plant_name = 'Rose'
   # "step 'user search for the plant #{plant_name}"
@@ -109,29 +120,29 @@ Then(/^user can modify the quantity in the wishlist$/) do
   }
 end
 
-When(/^user verifies the data can be read from yml file$/) do
-  # below 2 lines of code moved to "env" file.
+When(/^user verifies data can be read from yml file$/) do
   # file_path = 'features/support/test data/test_data.yml'
-  # test_data = YAML.load_file file_path
+  # test_data = YAML.load_file 'features/support/test data/test_data.yml'
+  # # Moved the above code in "env.rb" for loading the file by default
+  p 'Orginal data from Yaml file:'
   p $test_data['language_name']
   p $test_data['chase']['id']
-  p 'Data -Modification :'
-  p $test_data['id'] = 400
-  p $test_data.fetch('language_name')
+  p 'Data modification :'
+  p $test_data['chase']['name'] = 'java'
+  p $test_data['chase']['id'] = '64617'
+  p 'File Concept for rewriting'
+  File.open($file_path, 'w') { |each_value|
 
-  File.open($file_path, 'w') { |f|
-    $test_data['chase']['id'] = 1300
-    f.write($test_data.to_yaml)
+    $test_data['chase']['id'] = 47272
+    each_value.write($test_data.to_yaml)
   }
-  p test_data['chase']['id']
+  p $test_data['chase']['id']
 end
 
-And(/^verify the details of the (.*) are correct$/) do |plant_name|
-  # table is a table.hashes.keys # => [:plant_details, :plant_values]
+And(/^verify the details of (.*) are correct$/) do |plant_name|
   p $test_data[plant_name]['Plant Type']
-
   actual_plant_details = on(OakPlantSearchPage).get_plant_info
   expected_plant_details = $test_data[plant_name]
-  sleep 2
-  expect(expected_plant_details.sort).should eql? actual_plant_details.sort
-  end
+  expect(expected_plant_details.sort).should.eql? actual_plant_details.sort
+end
+
