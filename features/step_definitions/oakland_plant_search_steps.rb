@@ -119,9 +119,8 @@ Then(/^user can modify the quantity in the wishlist$/) do
     Then verify user can see updated quantity
   }
 end
-
-When(/^user verifies data can be read from yml file$/) do
-  # file_path = 'features/support/test data/test_data.yml'
+When(/^user verifies the data can be read from yml file$/) do
+   # file_path = 'features/support/test data/test_data.yml'
   # test_data = YAML.load_file 'features/support/test data/test_data.yml'
   # # Moved the above code in "env.rb" for loading the file by default
   p 'Orginal data from Yaml file:'
