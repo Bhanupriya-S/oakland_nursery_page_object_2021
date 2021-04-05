@@ -13,7 +13,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="backports (v3.20.2, ruby-2.6.6-p146) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, ruby-2.6.6-p146) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.2.11, ruby-2.6.6-p146) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.2.15, ruby-2.6.6-p146) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="childprocess (v3.0.0, ruby-2.6.6-p146) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.8, ruby-2.6.6-p146) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cucumber (v3.2.0, ruby-2.6.6-p146) [gem]" level="application" />
@@ -48,7 +48,8 @@
       <RakeTaskImpl id="rake">
         <subtasks>
           <RakeTaskImpl description="Run Cucumber features" fullCommand="features" id="features" />
-          <RakeTaskImpl description="" fullCommand="default" id="default" />
+          <RakeTaskImpl description="Run Cucumber features" fullCommand="sanity" id="sanity" />
+          <RakeTaskImpl description="Run Cucumber features" fullCommand="smoke" id="smoke" />
         </subtasks>
       </RakeTaskImpl>
     </option>

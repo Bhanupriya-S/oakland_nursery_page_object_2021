@@ -8,7 +8,7 @@ Feature: Oakland_Plant_Search Functionality
   Scenario: verify the user can search for the given plant
     When user search for the plant Rose
     Then user should see the results related to Rose
-    And verify the search result is not more than 15
+    And verify the search result is not more than 10
   # Scenario name should be the same - it will run multiple times because of duplication
 
   @regression
@@ -19,7 +19,7 @@ Feature: Oakland_Plant_Search Functionality
     Examples:
       | plant_name | no_of_items |
       | Rose       | 10          |
-      | Sunflower  | 5          |
+      | Sunflower  | 2          |
 
     @jira-160
   Scenario Outline: verify the user can search for different plant with details
@@ -37,7 +37,7 @@ Feature: Oakland_Plant_Search Functionality
     Examples:
       | plant_name | no_of_items |
       | Rose       | 10          |
-      | Sunflower  | 10          |
+      | Sunflower  | 2           |
 
   Scenario: verify the user can add the plants to the wishlist
     When user search for the plant Rose

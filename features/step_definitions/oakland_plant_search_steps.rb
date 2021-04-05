@@ -31,23 +31,23 @@ Then(/^verify user can see updated quantity$/) do
   on(OakWishListPage).verify_wishlist_quantity_has_updated 3
 end
 
-# When(/^user adds the plant (.*) to the wishlist$/) do |plant_name|
-#   on(OakPlantSearchPage).search_plant plant_name
-#   @first_plant_name = on(OakPlantSearchPage).get_all_plant_names.first
-#   on(OakPlantSearchPage).add_plant_to_wishlist
-#   on(OakPlantSearchPage).verify_wishlist_has_plant @first_plant_name
-# end
+When(/^user adds the plant (.*) to the wishlist$/) do |plant_name|
+  on(OakPlantSearchPage).search_plant plant_name
+  @first_plant_name = on(OakPlantSearchPage).get_all_plant_names.first
+  on(OakPlantSearchPage).add_plant_to_wishlist
+  on(OakPlantSearchPage).verify_wishlist_has_plant @first_plant_name
+end
 
 # Above or Below
 
- When(/^user adds the plant (.*) to the wishlist$/) do
-   on(OakPlantSearchPage) do |page|
-     page.search_plant 'Rose'
-    @first_plant_name = page.get_all_plant_names.first
-     page.add_plant_to_wishlist
-     page.verify_wishlist_has_plant @first_plant_name
-   end
- end
+ # When(/^user adds the plant (.*) to the wishlist$/) do |plant_name|
+ #   on(OakPlantSearchPage) do |page|
+ #     page.search_plant plant_name
+ #    @first_plant_name = page.get_all_plant_names.first
+ #     page.add_plant_to_wishlist
+ #     page.verify_wishlist_has_plant @first_plant_name
+ #   end
+ # end
 
 And(/^user empty the wishlist$/) do
   on(OakWishListPage).empty_wishlist
@@ -120,7 +120,7 @@ Then(/^user can modify the quantity in the wishlist$/) do
   }
 end
 
-When(/^user verifies data can be read from yml file$/) do
+When(/^user verifies the data can be read from yml file$/) do
   # file_path = 'features/support/test data/test_data.yml'
   # test_data = YAML.load_file 'features/support/test data/test_data.yml'
   # # Moved the above code in "env.rb" for loading the file by default
@@ -145,4 +145,6 @@ And(/^verify the details of (.*) are correct$/) do |plant_name|
   expected_plant_details = $test_data[plant_name]
   expect(expected_plant_details.sort).should.eql? actual_plant_details.sort
 end
+
+
 
