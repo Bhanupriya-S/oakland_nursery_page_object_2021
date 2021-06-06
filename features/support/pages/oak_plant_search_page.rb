@@ -2,7 +2,7 @@ class OakPlantSearchPage
 
   include PageObject
 
-  page_url 'https://plants.oaklandnursery.com/12130001'
+  # page_url 'https://plants.oaklandnursery.com/12130001'
   page_url $app_url
 
   text_field(:search_plant_edit_box, id: 'NetPS-KeywordInput')
